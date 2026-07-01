@@ -1,0 +1,13 @@
+spring.datasource.url=jdbc:postgresql://localhost:5432/resume_mailer
+spring.datasource.username=your_db_username
+spring.datasource.password=your_db_password
+
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your_email@gmail.com
+spring.mail.password=your_app_password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+app.cors.allowed-origins=http://localhost:3000
+app.jwt.secret=your_jwt_secret

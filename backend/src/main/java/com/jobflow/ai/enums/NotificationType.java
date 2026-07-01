@@ -1,0 +1,2 @@
+package com.jobflow.ai.enums;
+public enum NotificationType { INTERVIEW_TOMORROW, FOLLOW_UP_DUE, RECRUITER_REPLIED, CAMPAIGN_COMPLETED, NEW_IMPORTED_JOBS, GENERAL }

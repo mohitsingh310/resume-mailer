@@ -1,0 +1,2 @@
+package com.jobflow.ai.enums;
+public enum TemplateCategory { COLD_EMAIL, REFERRAL, FOLLOW_UP, THANK_YOU, NETWORKING, SALARY_NEGOTIATION, INTERVIEW_REMINDER, CUSTOM }
