@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://resume-mailer-438v.onrender.com/api/:path*"
+    }
+  ]
+}
