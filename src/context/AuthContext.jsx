@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem('token');
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      axios.get('/api/auth/me').then(r => setUser(r.data)).catch(() => {
+      axios.get('https://resume-mailer-438v.onrender.com/api/auth/me').then(r => setUser(r.data)).catch(() => {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
       }).finally(() => setLoading(false));
@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const r = await axios.post('/api/auth/login', { email, password });
+    const r = await axios.post('https://resume-mailer-438v.onrender.com/api/auth/login', { email, password });
     localStorage.setItem('token', r.data.token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${r.data.token}`;
     setUser(r.data.user);
@@ -33,7 +33,7 @@ export function AuthProvider({ children }) {
   };
 
   const register = async (data) => {
-    const r = await axios.post('/api/auth/register', data);
+    const r = await axios.post('https://resume-mailer-438v.onrender.com/api/auth/register', data);
     localStorage.setItem('token', r.data.token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${r.data.token}`;
     setUser(r.data.user);
