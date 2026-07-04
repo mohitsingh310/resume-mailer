@@ -1,0 +1,32 @@
+{
+  "name": "resume-mailer-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "axios": "^1.6.2",
+    "http-proxy-middleware": "^2.0.6",
+    "lucide-react": "^0.309.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2",
+    "react-router-dom": "^6.21.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

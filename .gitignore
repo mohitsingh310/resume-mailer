@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+src/main/resources/application.properties
+target/
+.idea/
+=======
+node_modules
+>>>>>>> b8a3e00e19429abaf37f4f975d7b1a0fec2416e9
