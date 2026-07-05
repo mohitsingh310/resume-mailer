@@ -35,7 +35,7 @@ public class GmailController {
             });
         } catch (Exception e) { /* log */ }
         return ResponseEntity.status(HttpStatus.FOUND)
-                .header("Location", "http://localhost:3000/settings?gmail=connected").build();
+                .header("Location", "https://resume-mailer.vercel.app/settings?gmail=connected").build();
     }
 
     @PostMapping("/api/gmail/disconnect")
