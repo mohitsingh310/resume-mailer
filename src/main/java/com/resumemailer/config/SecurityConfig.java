@@ -34,7 +34,12 @@ public class SecurityConfig {
             .csrf(c -> c.disable())
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(a -> a
-                .requestMatchers("/api/auth/**", "/api/gmail/callback").permitAll()
+                    .requestMatchers(
+                            "/api/auth/**",
+                            "/api/gmail/callback",
+                            "/api/health"
+                    ).permitAll()
+
                 .anyRequest().authenticated())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
