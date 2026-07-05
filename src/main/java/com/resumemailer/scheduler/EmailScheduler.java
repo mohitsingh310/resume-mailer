@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.time.ZoneId;
 
 @Component
 @RequiredArgsConstructor
@@ -23,7 +24,8 @@ public class EmailScheduler {
     @Transactional
     public void processScheduledEmails() {
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now =
+                LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
 
         log.info("========== SCHEDULER CHECK ==========");
         log.info("Server current time: {}", now);
@@ -82,7 +84,7 @@ public class EmailScheduler {
                 );
 
                 s.setStatus("SENT");
-                s.setSentAt(LocalDateTime.now());
+                s.setSentAt(LocalDateTime.now(ZoneId.of("Asia/Kolkata")));
 
                 SentEmail sent = SentEmail.builder()
                         .user(s.getUser())
@@ -97,7 +99,7 @@ public class EmailScheduler {
                         .cc(s.getCc())
                         .bcc(s.getBcc())
                         .status("SENT")
-                        .sentAt(LocalDateTime.now())
+                        .sentAt(LocalDateTime.now(ZoneId.of("Asia/Kolkata")))
                         .build();
 
                 sentEmailRepository.save(sent);
