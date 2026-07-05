@@ -119,7 +119,7 @@ public class GmailService {
     public String getAuthUrl(String state) {
         return "https://accounts.google.com/o/oauth2/v2/auth" +
                 "?client_id=" + clientId +
-                "&redirect_uri=" + "http://localhost:8080/api/gmail/callback" +
+                "&redirect_uri=" + "https://resume-mailer-438v.onrender.com/api/gmail/callback" +
                 "&response_type=code" +
                 "&scope=https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.email" +
                 "&access_type=offline&prompt=consent&state=" + state;
@@ -132,7 +132,7 @@ public class GmailService {
         body.add("code", code);
         body.add("client_id", clientId);
         body.add("client_secret", clientSecret);
-        body.add("redirect_uri", "http://localhost:8080/api/gmail/callback");
+        body.add("redirect_uri", "https://resume-mailer-438v.onrender.com/api/gmail/callback");
         body.add("grant_type", "authorization_code");
         var resp = restTemplate.postForEntity("https://oauth2.googleapis.com/token", new HttpEntity<>(body, headers), Map.class);
         return resp.getBody();
