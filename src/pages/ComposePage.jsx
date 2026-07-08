@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { templatesApi, resumesApi, campaignApi } from '../api';
+import { templatesApi, resumesApi, campaignApi, settingsApi } from '../api';
 import { Send, Clock, FileText, Loader2, Paperclip } from 'lucide-react';
 
 function applyVars(text, recruiter) {
@@ -10,9 +10,47 @@ function applyVars(text, recruiter) {
     .replace(/\{\{recruiterEmail\}\}/g, recruiter.email || '');
 }
 
+
+function buildFooter(settings, hasResume) {
+  if (!settings) return '';
+
+  const phone = settings.phoneNumber || '';
+  const email = settings.contactEmail || settings.email || '';
+  const linkedin = settings.linkedinUrl || '';
+
+  const parts = [];
+
+  if (phone) {
+    parts.push(`📞 ${phone}`);
+  }
+
+  if (email) {
+    parts.push(`✉️ <a href="mailto:${email}" style="color:#2563eb;text-decoration:none;">${email}</a>`);
+  }
+
+  if (linkedin) {
+    parts.push(`🔗 <a href="${linkedin}" target="_blank" rel="noopener noreferrer" style="color:#2563eb;text-decoration:none;">LinkedIn Profile</a>`);
+  }
+
+  return `
+    <div style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:20px 40px;text-align:center;">
+      ${hasResume ? `
+        <p style="margin:0 0 8px;font-size:12px;color:#9ca3af;">
+          📎 Resume attached to this email
+        </p>
+      ` : ''}
+
+      <p style="margin:0;font-size:12px;color:#6b7280;">
+        ${parts.join(' &nbsp;|&nbsp; ')}
+      </p>
+    </div>
+  `;
+}
+
 export default function ComposePage() {
   const [templates, setTemplates] = useState([]);
   const [resumes, setResumes] = useState([]);
+  const [userSettings, setUserSettings] = useState(null);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [recruiter, setRecruiter] = useState({ name: '', email: '', company: '', role: '', notes: '' });
   const [subject, setSubject] = useState('');
@@ -33,6 +71,7 @@ export default function ComposePage() {
   useEffect(() => {
     templatesApi.list({ size: 100 }).then(r => setTemplates(r.data.content));
     resumesApi.list().then(r => setResumes(r.data));
+    settingsApi.get().then(r => setUserSettings(r.data));
   }, []);
 
   const selectTemplate = (t) => {
@@ -54,9 +93,13 @@ export default function ComposePage() {
   //   return html.replace('<\/body>', NEW_FOOTER + '<\/body>');
   // };
 
-  const previewBody = selectedTemplate
-  ? applyVars(selectedTemplate.body, recruiter)
-  : '';
+  const templateBody = selectedTemplate
+    ? applyVars(selectedTemplate.body, recruiter)
+    : '';
+
+  const footer = buildFooter(userSettings, !!selectedResume);
+
+  const previewBody = templateBody + footer;
 
   const canSend = !!selectedTemplate && !!recruiter.email &&
     (sendMode === 'now' || (scheduleAt && scheduleTime));

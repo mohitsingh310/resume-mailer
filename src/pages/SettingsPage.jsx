@@ -92,6 +92,28 @@ export default function SettingsPage() {
                 <input className="input" placeholder="Name shown in sent emails" value={settings?.senderName || ''} onChange={f('senderName')} /></div>
               <div><label className="label">Reply-To Email</label>
                 <input className="input" type="email" placeholder="replies@youremail.com" value={settings?.replyTo || ''} onChange={f('replyTo')} /></div>
+              <div><label className="label">Phone Number</label>
+                <input className="input"
+                  placeholder="+91 9876543210"
+                  value={settings?.phoneNumber || ''}
+                  onChange={f('phoneNumber')} />
+              </div>
+
+              <div><label className="label">Contact Email</label>
+                <input className="input"
+                  type="email"
+                  placeholder="your@email.com"
+                  value={settings?.contactEmail || ''}
+                  onChange={f('contactEmail')} />
+              </div>
+
+              <div><label className="label">LinkedIn URL</label>
+                <input className="input"
+                  placeholder="https://www.linkedin.com/in/your-profile"
+                  value={settings?.linkedinUrl || ''}
+                  onChange={f('linkedinUrl')} />
+              </div>
+
               <div><label className="label">Email Signature (HTML)</label>
                 <textarea className="input resize-none h-24 text-xs font-mono" placeholder="<p>Best regards,<br/>Your Name</p>" value={settings?.emailSignature || ''} onChange={f('emailSignature')} /></div>
               <button onClick={save} disabled={saving} className="btn-primary">
